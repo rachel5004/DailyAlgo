@@ -17,6 +17,8 @@ public class PrivacyPolicy {
     private static int[] getResult(String today, String[] terms, String[] privacies) {
 
         final int size = privacies.length;
+        final LocalDate todayLocalDate = parseLocalDate(today);
+
         // get terms as map
         Map<String, Long> termMap = new HashMap<>();
 
@@ -25,6 +27,7 @@ public class PrivacyPolicy {
             termMap.put(termArr[0], Long.parseLong(termArr[1]));
         }
 
+        // get privacy as array
         String[][] privacyArray = new String[size][2];
 
         for (int i = 0; i < size; i++) {
@@ -32,8 +35,6 @@ public class PrivacyPolicy {
             privacyArray[i][0] = privArr[1];
             privacyArray[i][1] = privArr[0];
         }
-
-        LocalDate todayLocalDate = parseLocalDate(today);
 
         List<Integer> resultList = new ArrayList<>();
 
@@ -47,16 +48,14 @@ public class PrivacyPolicy {
         }
 
         return resultList.stream()
-            .mapToInt(i -> i)
-            .toArray();
+                         .mapToInt(i -> i)
+                         .toArray();
 
     }
-
 
     private static LocalDate parseLocalDate(String dateString) {
         return LocalDate.parse(dateString.replace(".", "-"), DateTimeFormatter.ISO_DATE);
     }
-
 
     public static void main(String[] args) {
 
