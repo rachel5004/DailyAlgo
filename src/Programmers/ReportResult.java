@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 /*
 https://school.programmers.co.kr/learn/courses/30/lessons/92334
-개인 정보 수집 유효 기간
+신고 결과 받기
  */
 public class ReportResult {
 
