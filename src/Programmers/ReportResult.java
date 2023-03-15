@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 /*
 https://school.programmers.co.kr/learn/courses/30/lessons/92334
-신고 결과 받기
+신고 결과 받
  */
 public class ReportResult {
 
@@ -18,17 +18,13 @@ public class ReportResult {
         // 리폿당한 횟수
         Map<String, Integer> reportCnt = Arrays.stream(id_list)
             .collect(Collectors.toMap(id -> id, id -> 0,
-                (u, v) -> {
-                    return null;
-                },
+                (u, v) -> null,
                 LinkedHashMap::new
             ));
 
         Map<String, List<String>> reporter = Arrays.stream(id_list)
             .collect(Collectors.toMap(id -> id, id -> new ArrayList<>(),
-                (u, v) -> {
-                    return null;
-                },
+                (u, v) -> null,
                 LinkedHashMap::new
             ));
 
@@ -38,6 +34,7 @@ public class ReportResult {
         }
 
         reporter.forEach((key, value) -> {
+            value = value.stream().distinct().collect(Collectors.toList());
             if (value.size() >= k) {
                 value.forEach(it -> reportCnt.put(it, reportCnt.get(it) + 1));
             }
@@ -51,10 +48,10 @@ public class ReportResult {
 
     public static void main(String[] args) {
 
-        String[] ids = {"muzi", "frodo", "apeach", "neo"};
-        String[] reports = {"muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"};
-
-        System.out.println(Arrays.toString(getResult(ids, reports, 2)));
+        String[] ids = {"con", "ryan"};
+        String[] reports = {"ryan con", "ryan con", "ryan con", "ryan con"};
+        int k = 3;
+        System.out.println(Arrays.toString(getResult(ids, reports, k)));
     }
 
 }
